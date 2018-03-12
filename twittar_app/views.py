@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import CreateView
 from .models import Tweet
 from .forms import *
 from django.contrib.auth import login, authenticate
@@ -24,7 +23,7 @@ def signup(request):
 class MainPageView(View):
 
     def get(self, request):
-        tweets = Tweet.objects.all()
+        tweets = Tweet.objects.all().order_by('-creation_date')
         return render(request, 'main.html', {'tweets': tweets})
 
 

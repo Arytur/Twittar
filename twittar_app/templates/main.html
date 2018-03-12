@@ -2,20 +2,20 @@
 
 {% block content %}
     <div class="container">
+
         <h2>W budowie Twitter</h2>
 
-        <table>
-            <thead>
-            <tr>
-                <th>{{ user.username }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>xxx</td>
-            </tr>
-            </tbody>
+        <a href="{% url 'add_post' %}"><button type="button" class="btn btn-info btn-lg btn-block">Add post</button></a>
 
-        </table>
+        {% for tweet in tweets %}
+        <div class="card">
+          <h5 class="card-header">{{ tweet.creation_date }}</h5>
+          <div class="card-body">
+            <h5 class="card-title">{{ tweet.content }}</h5>
+            <p class="card-text">{{ user }}</p>
+            <a href="#" class="btn btn-primary">Add comment</a>
+          </div>
+        </div>
+        {% endfor %}
     </div>
 {% endblock %}
