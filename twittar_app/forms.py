@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import Textarea
+
+from twittar_app.models import Tweet
 
 
 class SignUpForm(UserCreationForm):
@@ -11,4 +14,15 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2', )
 
 
-class
+class AddPostForm(forms.ModelForm):
+
+    class Meta:
+        model = Tweet
+        fields = ['content']
+        widgets = {
+            'content': Textarea(attrs={'cols': 60, 'rows': 10}),
+        }
+
+
+
+

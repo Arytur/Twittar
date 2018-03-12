@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import *
+from django.views.generic import CreateView
+from .models import Tweet
 from .forms import *
 from django.contrib.auth import login, authenticate
 
@@ -25,6 +26,26 @@ class MainPageView(View):
     def get(self, request):
         tweets = Tweet.objects.all()
         return render(request, 'main.html', {'tweets': tweets})
+
+
+class AddPostView(View):
+
+    def get(self, request):
+        form = AddPostForm()
+        return render(request, 'add_post.html', {'form': form})
+
+    def post(self, request):
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.user = request.user
+            new_post.save()
+            return redirect('/')
+
+
+
+
+
 
 
 

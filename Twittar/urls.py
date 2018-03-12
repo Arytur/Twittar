@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^signup/$', signup, name='signup'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^add_post', AddPostView.as_view(), name='add_post')
 ]
