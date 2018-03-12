@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .models import *
 from .forms import *
-from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 
 
