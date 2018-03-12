@@ -3,11 +3,13 @@
 {% block title %}Add post{% endblock %}
 
 {% block content %}
+    <div class="container">
     <h2>Add post</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Add</button>
     </form>
+    </div>
 
 {% endblock %}

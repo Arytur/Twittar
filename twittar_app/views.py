@@ -42,6 +42,14 @@ class AddPostView(View):
             return redirect('/')
 
 
+class MyPostsView(View):
+
+    def get(self, request):
+        user = request.user
+        posts = Tweet.objects.filter(user=user)
+        return render(request, 'my_posts.html', {'posts': posts})
+
+
 
 
 

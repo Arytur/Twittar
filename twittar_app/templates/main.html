@@ -6,16 +6,16 @@
         <h2>W budowie Twitter</h2>
 
         <a href="{% url 'add_post' %}"><button type="button" class="btn btn-info btn-lg btn-block">Add post</button></a>
-
+        <br><br>
         {% for tweet in tweets %}
         <div class="card">
           <h5 class="card-header">{{ tweet.creation_date }}</h5>
           <div class="card-body">
             <h5 class="card-title">{{ tweet.content }}</h5>
-            <p class="card-text">{{ user }}</p>
+            <p class="card-text">{{ tweet.user }}</p>
             <a href="#" class="btn btn-primary">Add comment</a>
           </div>
-        </div>
+        </div><br>
         {% endfor %}
     </div>
 {% endblock %}

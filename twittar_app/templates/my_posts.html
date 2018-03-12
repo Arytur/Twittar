@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}My Posts{% endblock %}
+
+{% block content %}
+    <div class="container">
+    {% for post in posts %}
+        <div class="card">
+          <h5 class="card-header">{{ post.creation_date }}</h5>
+          <div class="card-body">
+            <h5 class="card-title">{{ post.content }}</h5>
+            <p class="card-text">{{ post.user }}</p>
+            <a href="#" class="btn btn-primary">Add comment</a>
+          </div>
+        </div><br>
+    {% endfor %}
+    </div>
+{% endblock %}
