@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^add_post', AddPostView.as_view(), name='add_post'),
     url(r'^my_posts/$', MyPostsView.as_view(), name='my_posts'),
-    url(r'^post/(?P<post_id>(\d)+)/$', PostView.as_view(), name='post')
+    url(r'^post/(?P<post_id>(\d)+)/$', PostView.as_view(), name='post'),
+    url(r'^user/(?P<user_id>(\d)+)/', UserInfoView.as_view(), name='user_info')
 ]

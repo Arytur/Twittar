@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user.get_username }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+    <h2 class="text-center">{{ user.get_username }}</h2><hr>
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item"><i>Tweets:</i> <strong>{{ user.tweet_set.count }}</strong></li>
+            <li class="list-group-item"><i>Comments:</i> <strong>{{ user.comments_set.count }}</strong></li>
+            <li class="list-group-item"><i>Last time visited:</i> <strong>{{ user.last_login }}</strong></li>
+            <li class="list-group-item"><i>Email:</i> <strong>{{ user.email }}</strong></li>
+            <li class="list-group-item"><i>Registration date:</i> <strong>{{ user.date_joined }}</strong></li>
+        </ul>
+    </div><br>
+
+        <h4 class="text-center">Last posts:</h4><hr>
+        {% for tweet in tweets %}
+            <div class="card">
+            <div class="float-right">
+                <h7 class="card-header float-right small">{{ tweet.creation_date|timesince }}</h7>
+            </div>
+              <div class="card-body">
+                <h7 class="card-title">{{ tweet.content }}</h7><hr>
+                <p class="card-text"><i>{{ tweet.user }}</i></p>
+                  <a href="{% url 'post' post_id=tweet.id %}" class="btn btn-info">Show post</a>
+                <a href="#" class="btn btn-primary">Add comment</a>
+              </div>
+            </div><br>
+        {% endfor %}
+
+        <h4 class="text-center">Last comments:</h4><hr>
+        {%  for comment in comments %}
+            <div class="card">
+                    <div class="card-header small float-right">
+                        <h7 class="small">{{ comment.creation_date|timesince }}</h7>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p class="small">{{ comment.comment }}</p>
+                            <footer class="blockquote-footer"><i>{{ comment.user }}</i></footer>
+                        </blockquote>
+                    </div>
+            </div><br>
+        {% endfor %}
+    </div>
+{% endblock %}

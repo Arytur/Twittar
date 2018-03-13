@@ -81,3 +81,17 @@ class PostView(LoginRequiredMixin, View):
             new_comment.tweet = tweet
             new_comment.save()
             return HttpResponseRedirect(self.request.path_info)
+
+
+class UserInfoView(View):
+
+    def get(self, request, user_id):
+        user = User.objects.get(id=user_id)
+        tweets = Tweet.objects.filter(user_id=user_id)
+        comments = Comments.objects.filter(user_id=user_id)
+        ctx = {
+            'user': user,
+            'tweets': tweets,
+            'comments': comments
+        }
+        return render(request, 'user_info.html', ctx)
