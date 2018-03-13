@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
@@ -21,11 +22,11 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-class MainPageView(View):
+class MainPageView(LoginRequiredMixin, View):
 
     def get(self, request):
         tweets = Tweet.objects.all().order_by('-creation_date')
-        comments = Comments.objects.all().order_by('-creation_date')
+        comments = Comments.objects.all().order_by('creation_date')
         comments_amount = len(comments)
         ctx = {
             'tweets': tweets,
@@ -35,7 +36,7 @@ class MainPageView(View):
         return render(request, 'main.html', ctx)
 
 
-class AddPostView(View):
+class AddPostView(LoginRequiredMixin, View):
 
     def get(self, request):
         form = AddPostForm()
@@ -50,7 +51,7 @@ class AddPostView(View):
             return redirect('/')
 
 
-class MyPostsView(View):
+class MyPostsView(LoginRequiredMixin, View):
 
     def get(self, request):
         user = request.user
@@ -58,7 +59,7 @@ class MyPostsView(View):
         return render(request, 'my_posts.html', {'posts': posts})
 
 
-class PostView(View):
+class PostView(LoginRequiredMixin, View):
 
     def get(self, request, post_id):
         tweet = Tweet.objects.get(id=post_id)
