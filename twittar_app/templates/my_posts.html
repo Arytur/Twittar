@@ -6,9 +6,11 @@
     <div class="container">
     {% for post in posts %}
         <div class="card">
-          <h5 class="card-header">{{ post.creation_date }}</h5>
+        <div class="float-right">
+            <h7 class="card-header float-right small">{{ post.creation_date|timesince }}</h7>
+        </div>
           <div class="card-body">
-            <h5 class="card-title">{{ post.content }}</h5>
+            <h7 class="card-title">{{ post.content }}</h7><hr>
             <p class="card-text"><i>{{ post.user }}</i></p>
               <a href="{% url 'post' post_id=post.id %}" class="btn btn-info">Show post</a>
             <a href="#" class="btn btn-primary">Add comment</a>

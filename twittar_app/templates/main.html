@@ -1,13 +1,5 @@
 {% extends 'base.html' %}
 
-{% block style %}
-    <style>
-    #comments {
-        display: none;
-    }
-    </style>
-{% endblock %}
-
 {% block content %}
 
     <div class="container">
@@ -17,24 +9,28 @@
         {% for tweet in tweets %}
         <div class="card">
             <div class="float-right">
-                <h5 class="card-header">{{ tweet.creation_date }}</h5>
+                <h6 class="card-header float-right small">{{ tweet.creation_date|timesince }} ago</h6>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ tweet.content|truncatewords:10 }}</h5>
+                <h7 class="card-title">{{ tweet.content|truncatewords:10 }}</h7><hr>
                 <p class="card-text"><i>{{ tweet.user }}</i></p>
                 <div class="float-right">
                     <a href="{% url 'post' post_id=tweet.id %}" class="btn btn-info">Show post</a>
+                    {% if tweet.comments_set.exists %}
                     <button class="btn btn-warning" onclick="myFunction()">Comments ({{ comments_amount }})</button>
+                    {% else %}
+                    <button class="btn btn-warning disabled">Comments</button>
+                    {% endif %}
                 </div>
             </div>
         </div><br>
         {% endfor %}
 
-        <div id="comments">
+        <div id="comments" style="display: none">
             {%  for comment in comments %}
                 <div class="card bg-light">
                     <div class="card-body">
-                        <p style="float: right">{{ comment.creation_date }}</p>
+                        <p style="float: right" class="small">{{ comment.creation_date|timesince }}</p>
                         <p>{{ comment.comment }}</p>
                         <p><i>{{ comment.user }}</i></p>
                     </div>
