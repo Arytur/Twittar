@@ -9,8 +9,26 @@
           <div class="card-body">
             <h5 class="card-title">{{ tweet.content }}</h5>
             <p class="card-text"><i>{{ tweet.user }}</i></p>
-            <a href="#" class="btn btn-primary">Add comment</a>
+            <button onclick="myFunction()" class="btn btn-warning">Show comments</button>
+                  </div><br><br>
+              <div id="comment">
+                  <form method="post" action="#">
+                      {% csrf_token %}
+                      {{ form.as_ }}
+                      <button type="submit" class="btn btn-success">Add comment</button>
+                  </form>
+              </div>
           </div>
         </div><br>
     </div>
+    <script>
+    function myFunction() {
+        var x = document.getElementById('comment');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+    </script>
 {% endblock %}

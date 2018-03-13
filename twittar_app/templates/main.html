@@ -9,14 +9,31 @@
         <br><br>
         {% for tweet in tweets %}
         <div class="card">
-          <h5 class="card-header float-md-right">{{ tweet.creation_date }}</h5>
+        <div class="float-right">
+          <h5 class="card-header">{{ tweet.creation_date }}</h5>
+            </div>
           <div class="card-body">
             <h5 class="card-title">{{ tweet.content|truncatewords:10 }}</h5>
             <p class="card-text"><i>{{ tweet.user }}</i></p>
-            <a href="{% url 'post' post_id=tweet.id %}" class="btn btn-primary">Show post</a>
-            <a href="#" class="btn btn-primary">Add comment</a>
+              <div class="float-right">
+            <a href="{% url 'post' post_id=tweet.id %}" class="btn btn-info">Show post</a>
+              <button class="btn btn-warning">Comments</button>
+                  </div><br><br>
+              <div id="comment">
+
+              </div>
           </div>
         </div><br>
         {% endfor %}
     </div>
+    <script>
+    function myFunction() {
+        var x = document.getElementById('comment');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+    </script>
 {% endblock %}

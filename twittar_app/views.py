@@ -1,6 +1,7 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Tweet
+from .models import Tweet, Comments
 from .forms import *
 from django.contrib.auth import login, authenticate
 
@@ -25,6 +26,8 @@ class MainPageView(View):
     def get(self, request):
         tweets = Tweet.objects.all().order_by('-creation_date')
         return render(request, 'main.html', {'tweets': tweets})
+
+
 
 
 class AddPostView(View):
@@ -54,4 +57,19 @@ class PostView(View):
 
     def get(self, request, post_id):
         tweet = Tweet.objects.get(id=post_id)
-        return render(request, 'post.html', {'tweet': tweet})
+        form = AddCommentForm()
+        ctx = {
+            'tweet': tweet,
+            'form': form
+        }
+        return render(request, 'post.html', ctx)
+
+    def post(self, request, post_id):
+        form = AddCommentForm(request.POST)
+        tweet = Tweet.objects.get(id=post_id)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.user = request.user
+            new_comment.tweet = tweet
+            new_comment.save()
+            return HttpResponseRedirect(self.request.path_info)
