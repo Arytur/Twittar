@@ -9,10 +9,11 @@
         <br><br>
         {% for tweet in tweets %}
         <div class="card">
-          <h5 class="card-header">{{ tweet.creation_date }}</h5>
+          <h5 class="card-header float-md-right">{{ tweet.creation_date }}</h5>
           <div class="card-body">
-            <h5 class="card-title">{{ tweet.content }}</h5>
-            <p class="card-text">{{ tweet.user }}</p>
+            <h5 class="card-title">{{ tweet.content|truncatewords:10 }}</h5>
+            <p class="card-text"><i>{{ tweet.user }}</i></p>
+            <a href="{% url 'post' post_id=tweet.id %}" class="btn btn-primary">Show post</a>
             <a href="#" class="btn btn-primary">Add comment</a>
           </div>
         </div><br>

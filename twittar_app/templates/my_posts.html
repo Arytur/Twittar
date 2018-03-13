@@ -9,7 +9,8 @@
           <h5 class="card-header">{{ post.creation_date }}</h5>
           <div class="card-body">
             <h5 class="card-title">{{ post.content }}</h5>
-            <p class="card-text">{{ post.user }}</p>
+            <p class="card-text"><i>{{ post.user }}</i></p>
+              <a href="{% url 'post' post_id=post.id %}" class="btn btn-info">Show post</a>
             <a href="#" class="btn btn-primary">Add comment</a>
           </div>
         </div><br>

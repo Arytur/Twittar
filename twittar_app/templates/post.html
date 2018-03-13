@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tweet.content|truncatewords:4 }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card">
+          <h5 class="card-header float-right">{{ tweet.creation_date }}</h5>
+          <div class="card-body">
+            <h5 class="card-title">{{ tweet.content }}</h5>
+            <p class="card-text"><i>{{ tweet.user }}</i></p>
+            <a href="#" class="btn btn-primary">Add comment</a>
+          </div>
+        </div><br>
+    </div>
+{% endblock %}

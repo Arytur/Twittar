@@ -46,18 +46,12 @@ class MyPostsView(View):
 
     def get(self, request):
         user = request.user
-        posts = Tweet.objects.filter(user=user)
+        posts = Tweet.objects.filter(user=user).order_by('-creation_date')
         return render(request, 'my_posts.html', {'posts': posts})
 
 
+class PostView(View):
 
-
-
-
-
-
-
-
-
-
-
+    def get(self, request, post_id):
+        tweet = Tweet.objects.get(id=post_id)
+        return render(request, 'post.html', {'tweet': tweet})
