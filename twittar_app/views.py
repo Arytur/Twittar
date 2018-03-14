@@ -25,8 +25,8 @@ def signup(request):
 class MainPageView(LoginRequiredMixin, View):
 
     def get(self, request):
-        tweets = Tweet.objects.all().order_by('-creation_date')
-        comments = Comments.objects.all().order_by('creation_date')
+        tweets = Tweet.objects.all()
+        comments = Comments.objects.all()
         comments_amount = len(comments)
         ctx = {
             'tweets': tweets,
@@ -55,7 +55,7 @@ class MyPostsView(LoginRequiredMixin, View):
 
     def get(self, request):
         user = request.user
-        posts = Tweet.objects.filter(user=user).order_by('-creation_date')
+        posts = Tweet.objects.filter(user=user)
         return render(request, 'my_posts.html', {'posts': posts})
 
 
