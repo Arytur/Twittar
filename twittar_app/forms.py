@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import Textarea
 
-from twittar_app.models import Tweet, Comments
+from twittar_app.models import Tweet, Comments, Message
 
 
 class SignUpForm(UserCreationForm):
@@ -34,4 +34,12 @@ class AddCommentForm(forms.ModelForm):
         }
 
 
+class SendMessageForm(forms.ModelForm):
+
+    class Meta:
+        model = Message
+        fields = ['message']
+        widgets = {
+            'message': Textarea(attrs={'cols': 60, 'rows': 4}),
+        }
 

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+    <ul>
+    {% for message in messages %}
+        {% if message.read == False %}
+            <li><a href="{% url 'message' user_id=message.sent_to.id mess_id=message.id %}"><strong>{{ message }}</strong></a></li>
+        {% else %}
+            <li><a href="{% url 'message' user_id=message.sent_to.id mess_id=message.id %}">{{ message }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    </div>
+{% endblock %}

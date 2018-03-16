@@ -25,11 +25,12 @@ class Comments(models.Model):
 
 
 class Message(models.Model):
+    # title = models.CharField(max_length=30, verbose_name='Title')
     message = models.CharField(max_length=140, help_text='Max number of characters: 140', verbose_name='Your message')
     sent_by = models.ForeignKey(User, related_name='sent_by')
     sent_to = models.ForeignKey(User, related_name='sent_to')
     date = models.DateTimeField(auto_now_add=True)
-    read = models.BooleanField(default=True)
+    read = models.BooleanField(default=False)
 
     def __str__(self):
         return self.message + ' - ' + self.sent_by.get_username()

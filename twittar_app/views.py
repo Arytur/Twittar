@@ -89,9 +89,39 @@ class UserInfoView(View):
         user = User.objects.get(id=user_id)
         tweets = Tweet.objects.filter(user_id=user_id)
         comments = Comments.objects.filter(user_id=user_id)
+        form = SendMessageForm()
         ctx = {
             'user': user,
             'tweets': tweets,
-            'comments': comments
+            'comments': comments,
+            'form': form,
         }
         return render(request, 'user_info.html', ctx)
+
+    def post(self, request, user_id):
+        # form to send a message
+        user = User.objects.get(id=user_id)
+        form = SendMessageForm(request.POST)
+        if form.is_valid():
+            new_message = form.save(commit=False)
+            new_message.sent_to = user
+            new_message.sent_by = request.user
+            new_message.save()
+            return HttpResponseRedirect(self.request.path_info)
+
+
+class MailboxView(View):
+
+    def get(self, request, user_id):
+        messages = Message.objects.filter(sent_to=user_id)
+        return render(request, 'mailbox.html', {'messages': messages})
+
+
+class MessageView(View):
+
+    def get(self, request, user_id, mess_id):
+        message = Message.objects.get(id=mess_id)
+        message.read = True
+        message.save()
+        return render(request, 'message.html', {'message': message})
+

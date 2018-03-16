@@ -28,4 +28,6 @@ urlpatterns = [
     url(r'^my_posts/$', MyPostsView.as_view(), name='my_posts'),
     url(r'^post/(?P<post_id>(\d)+)/$', PostView.as_view(), name='post'),
     url(r'^user/(?P<user_id>(\d)+)/', UserInfoView.as_view(), name='user_info'),
+    url(r'^mailbox/(?P<user_id>(\d)+)/$', MailboxView.as_view(), name='mailbox'),
+    url(r'^mailbox/(?P<user_id>(\d)+)/(?P<mess_id>(\d)+)/', MessageView.as_view(), name='message'),
 ]

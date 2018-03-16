@@ -24,6 +24,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'my_posts' %}">My posts</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mailbox' user_id=user.id %}">Mailbox</a>
+                    </li>
+                    {% endif %}
               </ul>
           </div>
                 <h4 class="text-center">{{ user }}</h4>
