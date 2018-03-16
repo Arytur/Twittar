@@ -20,9 +20,16 @@ class Comments(models.Model):
     tweet = models.ForeignKey(Tweet)
     creation_date = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ['-creation_date']
-
     def __str__(self):
         return self.comment[:20]
 
+
+class Message(models.Model):
+    message = models.CharField(max_length=140, help_text='Max number of characters: 140', verbose_name='Your message')
+    sent_by = models.ForeignKey(User, related_name='sent_by')
+    sent_to = models.ForeignKey(User, related_name='sent_to')
+    date = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.message + ' - ' + self.sent_by.get_username()

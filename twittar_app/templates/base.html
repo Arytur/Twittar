@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>{% block title %}Twittar{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    {% block style %}
     <style>
         body {
             background-color: #d1ecf1;
         }
     </style>
-    {% block style %}{% endblock %}
+    {% endblock %}
+    {% block script %}{% endblock %}
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
