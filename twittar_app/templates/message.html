@@ -2,10 +2,15 @@
 
 {% block content %}
     <div class="container">
-        <ul>
-            <li>{{ message.sent_by.get_username }}</li>
-            <li>{{ message.message }}</li>
-            <li>{{ message.date }}</li>
-        </ul>
+        <div class="jumbotron">
+          <h1 class="display-4">Title</h1>
+          <p class="lead">{{ message.message }}</p>
+          <hr class="my-4">
+          <h4><strong>{{ message.sent_by.get_username }}</strong></h4>
+          <p><i>{{ message.date }}</i></p>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Answer</a>
+          </p>
+        </div>
     </div>
 {% endblock %}

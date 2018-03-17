@@ -19,12 +19,14 @@
     </div><br>
 
     <div>
-        <h4>Send a message to {{ user.get_username }}</h4><hr>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-info">Send</button>
-        </form>
+        <h4 class="text-center">Send a message to {{ user.get_username }}</h4><hr>
+        <div class="form-group">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_table }}
+                <br><button type="submit" class="btn btn-info">Send</button>
+            </form>
+        </div>
     </div>
 
         <h4 class="text-center">Last posts:</h4><hr>

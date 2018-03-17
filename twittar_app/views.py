@@ -64,7 +64,7 @@ class PostView(LoginRequiredMixin, View):
     def get(self, request, post_id):
         tweet = Tweet.objects.get(id=post_id)
         form = AddCommentForm()
-        comments = Comments.objects.filter(tweet_id=post_id)
+        comments = Comments.objects.filter(tweet_id=post_id).order_by('creation_date')
         ctx = {
             'tweet': tweet,
             'form': form,
