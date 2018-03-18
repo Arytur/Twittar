@@ -8,3 +8,7 @@ Django project based on Twitter.
 * send private message to another user
 
 
+![Image](https://github.com/Arytur/Twittar/blob/master/twittar.png?raw=true)
+
+
+![Image](https://github.com/Arytur/Twittar/blob/master/twittar2.png?raw=true)
