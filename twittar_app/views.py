@@ -26,12 +26,8 @@ class MainPageView(LoginRequiredMixin, View):
 
     def get(self, request):
         tweets = Tweet.objects.all()
-        comments = Comments.objects.all()
-        comments_amount = len(comments)
         ctx = {
             'tweets': tweets,
-            'comments': comments,
-            'comments_amount': comments_amount
         }
         return render(request, 'main.html', ctx)
 
