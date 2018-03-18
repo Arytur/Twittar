@@ -6,7 +6,7 @@
     <div class="container">
         <div class="card">
             <div class="float-right">
-                <h7 class="card-header float-right small">{{ tweet.creation_date|timesince }}</h7>
+                <h7 class="card-header float-right small">{{ tweet.creation_date|timesince }} ago</h7>
             </div>
             <div class="card-body">
                 <h7 class="card-title">{{ tweet.content }}</h7><hr>
@@ -25,7 +25,7 @@
         {%  for comment in comments %}
         <div class="card">
                 <div class="card-header small float-right">
-                    <h7 class="small">{{ comment.creation_date|timesince }}</h7>
+                    <h7 class="small">{{ comment.creation_date|timesince }} ago</h7>
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
