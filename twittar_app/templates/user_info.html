@@ -7,19 +7,20 @@
 {% block content %}
     <div class="container">
 
-    <h2 class="text-center">{{ user.get_username }}</h2><hr>
+    <h2 class="text-center">{{ user_info.username }}</h2><hr>
     <div>
         <ul class="list-group">
-            <li class="list-group-item"><i>Tweets:</i> <strong>{{ user.tweet_set.count }}</strong></li>
-            <li class="list-group-item"><i>Comments:</i> <strong>{{ user.comments_set.count }}</strong></li>
-            <li class="list-group-item"><i>Last time visited:</i> <strong>{{ user.last_login }}</strong></li>
-            <li class="list-group-item"><i>Email:</i> <strong>{{ user.email }}</strong></li>
-            <li class="list-group-item"><i>Registration date:</i> <strong>{{ user.date_joined }}</strong></li>
+            <li class="list-group-item"><i>Tweets:</i> <strong>{{ user_info.tweet_set.count }}</strong></li>
+            <li class="list-group-item"><i>Comments:</i> <strong>{{ user_info.comments_set.count }}</strong></li>
+            <li class="list-group-item"><i>Last time visited:</i> <strong>{{ user_info.last_login }}</strong></li>
+            <li class="list-group-item"><i>Email:</i> <strong>{{ user_info.email }}</strong></li>
+            <li class="list-group-item"><i>Registration date:</i> <strong>{{ user_info.date_joined }}</strong></li>
         </ul>
     </div><br>
 
     <div>
-        <h4 class="text-center">Send a message to {{ user.get_username }}</h4><hr>
+        {% if user.get_username != user_info.username %}
+        <h4 class="text-center">Send a message to {{ user_info.username }}</h4><hr>
         <div class="form-group">
             <form method="post">
                 {% csrf_token %}
@@ -27,6 +28,7 @@
                 <br><button type="submit" class="btn btn-info">Send</button>
             </form>
         </div>
+        {% endif %}
     </div>
 
         <h4 class="text-center">Last posts:</h4><hr>

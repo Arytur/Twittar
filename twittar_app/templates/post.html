@@ -10,7 +10,7 @@
             </div>
             <div class="card-body">
                 <h7 class="card-title">{{ tweet.content }}</h7><hr>
-                <p class="card-text"><i>{{ tweet.user }}</i></p>
+                <p class="card-text"><i><a href="{% url 'user_info' user_id=tweet.user.id %}">{{ tweet.user }}</a></i></p>
             </div>
         </div><br>
 
@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
                         <p class="small">{{ comment.comment }}</p>
-                        <footer class="blockquote-footer"><i>{{ comment.user }}</i></footer>
+                        <footer class="blockquote-footer"><i><a href="{% url 'user_info' user_id=comment.user.id %}">{{ comment.user }}</a></i></footer>
                     </blockquote>
                 </div>
         </div><br>

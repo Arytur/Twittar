@@ -82,12 +82,12 @@ class PostView(LoginRequiredMixin, View):
 class UserInfoView(View):
 
     def get(self, request, user_id):
-        user = User.objects.get(id=user_id)
+        user_info = User.objects.get(id=user_id)
         tweets = Tweet.objects.filter(user_id=user_id)
         comments = Comments.objects.filter(user_id=user_id)
         form = SendMessageForm()
         ctx = {
-            'user': user,
+            'user_info': user_info,
             'tweets': tweets,
             'comments': comments,
             'form': form,
@@ -96,11 +96,11 @@ class UserInfoView(View):
 
     def post(self, request, user_id):
         # form to send a message
-        user = User.objects.get(id=user_id)
+        user_info = User.objects.get(id=user_id)
         form = SendMessageForm(request.POST)
         if form.is_valid():
             new_message = form.save(commit=False)
-            new_message.sent_to = user
+            new_message.sent_to = user_info
             new_message.sent_by = request.user
             new_message.save()
             return HttpResponseRedirect(self.request.path_info)
