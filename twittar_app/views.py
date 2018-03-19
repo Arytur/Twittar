@@ -119,5 +119,18 @@ class MessageView(View):
         message = Message.objects.get(id=mess_id)
         message.read = True
         message.save()
-        return render(request, 'message.html', {'message': message})
+        form = SendMessageForm()
+        return render(request, 'message.html', {'message': message, 'form': form})
+
+    def post(self, request, user_id, mess_id):
+        # form to send a message
+        message = Message.objects.get(id=mess_id)
+        user_info = message.sent_by
+        form = SendMessageForm(request.POST)
+        if form.is_valid():
+            new_message = form.save(commit=False)
+            new_message.sent_to = user_info
+            new_message.sent_by = request.user
+            new_message.save()
+            return HttpResponseRedirect(self.request.path_info)
 

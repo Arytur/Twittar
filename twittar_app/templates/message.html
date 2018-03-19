@@ -12,5 +12,17 @@
             <a class="btn btn-primary btn-lg" href="#" role="button">Answer</a>
           </p>
         </div>
+
+        <div>
+        <h4 class="text-center">Send a message to {{ message.sent_by.username }}</h4><hr>
+        <div class="form-group">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_table }}
+                <br><button type="submit" class="btn btn-info">Send</button>
+            </form>
+        </div>
     </div>
+    </div>
+
 {% endblock %}

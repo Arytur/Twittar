@@ -2,14 +2,34 @@
 
 {% block content %}
     <div class="container">
-    <ul>
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">User</th>
+      <th scope="col">Message</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
     {% for message in messages %}
         {% if message.read == False %}
-            <li><a href="{% url 'message' user_id=message.sent_to.id mess_id=message.id %}"><strong>{{ message }}</strong></a></li>
+        <tr class="table-primary">
+          <th scope="row">{{ message.id }}</th>
+          <td>{{ message.sent_by.username }}</td>
+          <td><a href="{% url 'message' user_id=message.sent_to.id mess_id=message.id %}"><strong>{{ message|truncatechars:20 }}</strong></a></td>
+          <td>{{ message.date }}</td>
+        </tr>
         {% else %}
-            <li><a href="{% url 'message' user_id=message.sent_to.id mess_id=message.id %}">{{ message }}</a></li>
+        <tr class="table-light">
+          <th scope="row">{{ message.id }}</th>
+          <td>{{ message.sent_by.username }}</td>
+          <td><a href="{% url 'message' user_id=message.sent_to.id mess_id=message.id %}">{{ message|truncatechars:20 }}</a></td>
+          <td>{{ message.date }}</td>
+        </tr>
         {% endif %}
     {% endfor %}
-    </ul>
+  </tbody>
+</table>
     </div>
 {% endblock %}
