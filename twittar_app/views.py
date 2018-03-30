@@ -79,7 +79,7 @@ class PostView(LoginRequiredMixin, View):
             return HttpResponseRedirect(self.request.path_info)
 
 
-class UserInfoView(View):
+class UserInfoView(LoginRequiredMixin, View):
 
     def get(self, request, user_id):
         user_info = User.objects.get(id=user_id)
@@ -106,14 +106,14 @@ class UserInfoView(View):
             return HttpResponseRedirect(self.request.path_info)
 
 
-class MailboxView(View):
+class MailboxView(LoginRequiredMixin, View):
 
     def get(self, request, user_id):
         messages = Message.objects.filter(sent_to=user_id)
         return render(request, 'mailbox.html', {'messages': messages})
 
 
-class MessageView(View):
+class MessageView(LoginRequiredMixin, View):
 
     def get(self, request, user_id, mess_id):
         message = Message.objects.get(id=mess_id)
